@@ -8,7 +8,7 @@ import torch.distributed as dist
 
 
 def parse_args():
-    desc = "Pytorch implementation of DKFS"
+    desc = "Pytorch implementation of KDFS"
     parser = argparse.ArgumentParser(description=desc)
 
     parser.add_argument(
