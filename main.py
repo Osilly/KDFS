@@ -4,6 +4,7 @@ from train import Train
 from finetune import Finetune
 from train_ddp import TrainDDP
 from finetune_ddp import FinetuneDDP
+from test import Test
 import torch.distributed as dist
 
 
@@ -241,12 +242,6 @@ def parse_args():
     parser.add_argument(
         "--test_batch_size", type=int, default=256, help="Batch size for test"
     )
-    parser.add_argument(
-        "--test_student_ckpt_path",
-        type=str,
-        default=None,
-        help="The path where to load the student ckpt in test",
-    )
 
     # get_flops_and_params
     parser.add_argument(
@@ -275,6 +270,9 @@ def main():
         elif args.phase == "finetune":
             finetune = Finetune(args=args)
             finetune.main()
+        elif args.phase == "test":
+            test = Test(args=args)
+            test.main()
 
 
 if __name__ == "__main__":
