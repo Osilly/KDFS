@@ -1,0 +1,5 @@
+.vscode
+teacher_dir/resnet_56.pt
+teacher_dir/resnet_56_cifar100.pt
+teacher_dir/resnet_110.pt
+teacher_dir/resnet50-19c8e357.pth
