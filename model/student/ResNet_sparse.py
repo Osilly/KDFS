@@ -18,7 +18,6 @@ class MaskedNet(nn.Module):
 
         self.gumbel_temperature = gumbel_start_temperature
 
-        # self.epoch = 0
         self.ticket = False
 
         self.mask_modules = []
@@ -45,12 +44,7 @@ class MaskedNet(nn.Module):
             ):
                 m.load_state_dict(m.checkpoint)
 
-    # def prune(self):
-    #     for m in self.mask_modules:
-    #         m.prune()
-
     def update_gumbel_temperature(self, epoch):
-        # self.epoch += 1
         self.gumbel_temperature = self.gumbel_start_temperature * math.pow(
             self.gumbel_end_temperature / self.gumbel_start_temperature,
             epoch / self.num_epochs,
@@ -133,82 +127,6 @@ class MaskedNet(nn.Module):
                         m.feature_map_h * m.feature_map_w * m.out_channels
                     )
 
-            # for i, m in enumerate(self.mask_modules):
-            #     Flops_shortcut_conv = 0
-            #     Flops_shortcut_bn = 0
-            #     if len(self.mask_modules) in [48]:
-            #         if i % 3 == 0:
-            #             Flops_conv = (
-            #                 m.feature_map_h
-            #                 * m.feature_map_w
-            #                 * m.kernel_size
-            #                 * m.kernel_size
-            #                 * m.in_channels
-            #                 * m.out_channels
-            #             )
-            #         else:
-            #             Flops_conv = (
-            #                 m.feature_map_h
-            #                 * m.feature_map_w
-            #                 * m.kernel_size
-            #                 * m.kernel_size
-            #                 * m.in_channels
-            #                 * m.out_channels
-            #             )
-            #         Flops_bn = m.feature_map_h * m.feature_map_w * m.out_channels
-            #         if i % 3 == 2:
-            #             Flops_shortcut_conv = (
-            #                 m.feature_map_h
-            #                 * m.feature_map_w
-            #                 * 1
-            #                 * 1
-            #                 * m.in_channels
-            #                 * m.out_channels
-            #             )
-            #             Flops_shortcut_bn = (
-            #                 m.feature_map_h * m.feature_map_w * m.out_channels
-            #             )
-            #     elif len(self.mask_modules) in [16, 32]:
-            #         if i % 2 == 0:
-            #             Flops_conv = (
-            #                 m.feature_map_h
-            #                 * m.feature_map_w
-            #                 * m.kernel_size
-            #                 * m.kernel_size
-            #                 * m.in_channels
-            #                 * m.out_channels
-            #             )
-            #         else:
-            #             Flops_conv = (
-            #                 m.feature_map_h
-            #                 * m.feature_map_w
-            #                 * m.kernel_size
-            #                 * m.kernel_size
-            #                 * m.in_channels
-            #                 * m.out_channels
-            #             )
-            #         Flops_bn = m.feature_map_h * m.feature_map_w * m.mask.sum()
-            #         if i % 2 == 1 and i != 1:
-            #             Flops_shortcut_conv = (
-            #                 m.feature_map_h
-            #                 * m.feature_map_w
-            #                 * 1
-            #                 * 1
-            #                 * m.out_channels
-            #                 * m.out_channels
-            #             )
-            #             Flops_shortcut_bn = (
-            #                 m.feature_map_h * m.feature_map_w * m.out_channels
-            #             )
-            # Flops_conv = (
-            #     m.feature_map_h
-            #     * m.feature_map_w
-            #     * m.kernel_size
-            #     * m.kernel_size
-            #     * m.in_channels
-            #     * m.out_channels
-            # )
-            # Flops_bn = m.feature_map_h * m.feature_map_w * m.out_channels
             Flops_total = (
                 Flops_total
                 + Flops_conv
