@@ -26,7 +26,7 @@ If you find KDFS useful in your research, please consider citing:
 
 First you need to download the pre-trained model, you can get the pre-trained model we used at the following link:
 
-[Baidu Wangpan](https://pan.baidu.com/s/16b_iA3GINmnn1xHHC6InQA ) (password: zshb )
+[Baidu Wangpan](https://pan.baidu.com/s/16b_iA3GINmnn1xHHC6InQA ) (password: zshb)
 
 The performance of the pre-trained models are shown below:
 
@@ -39,7 +39,7 @@ The performance of the pre-trained models are shown below:
 
 Place the pre-trained model in folder `teacher_dir` .
 
-## 2. Train
+### 2. Train
 
 We provide training scripts for the models at different compression rates, they are in folder `run`.
 
@@ -137,3 +137,39 @@ imagenet:
 | run_resnet50_imagenet_prune2.sh | 4134M          | 1845M (55.36%)          | 75.80%     | 92.66%     |
 
 ## Test
+
+We provide trained weights and they can be accessed from the following links:
+
+[Baidu Wangpan](https://pan.baidu.com/s/1RmAkmejtB37MSr9N10dG1A  ) (password: 9qyz)
+
+You can use the test scripts we provide in folder `run` to get the performance of the trained weights, for example, to test resnet56 on cifar10:
+
+```
+bash run/run_resnet56_cifar10/test_resnet56_cifar10.sh
+```
+
+The details of the script are as follows, you need to change the path and such parameters:
+
+**run/run_resnet56_cifar10/test_resnet56_cifar10.sh:**
+
+```
+arch=resnet_56 # Model name
+dataset_dir=dataset_cifar10 # dataset path
+dataset_type=cifar10 # dataset type
+ckpt_path=ckpt_path # The weight path you want to test
+device=0 # gpu id
+CUDA_VISIBLE_DEVICES=$device python main.py \
+--phase test \
+--dataset_dir $dataset_dir \
+--dataset_type $dataset_type \
+--num_workers 8 \
+--pin_memory \
+--device cuda \
+--arch $arch \
+--test_batch_size 256 \
+--sparsed_student_ckpt_path $ckpt_path \
+```
+
+## Tips
+
+If you find any problems, please feel free to contact to the authors (osilly0616@gmail.com).
