@@ -20,6 +20,12 @@ If you find KDFS useful in your research, please consider citing:
 }
 ```
 
+## Requirements
+
+- Pytorch 1.10
+- tensorboard 2.11.0
+- nvidia-dali-cuda110 1.23.0 (optional)
+
 ## Training
 
 ### 1. download pre-trained model
